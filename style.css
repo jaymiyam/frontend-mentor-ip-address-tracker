@@ -69,6 +69,7 @@ h1 {
     background-color: white;
     border-radius: 10px 0 0 10px;
     border: none;
+    cursor: pointer;
   }
 
   & input:focus-visible {
@@ -89,6 +90,7 @@ h1 {
     background-position: center;
     padding: 1rem 1.5rem;
     border-radius: 0 10px 10px 0;
+    cursor: pointer;
   }
 }
 

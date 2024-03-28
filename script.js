@@ -4,6 +4,7 @@ const ipDisplay = document.querySelector('#ip-display');
 const locationDisplay = document.querySelector('#location-display');
 const timezoneDisplay = document.querySelector('#timezone-display');
 const ispDisplay = document.querySelector('#isp-display');
+const submitBtn = document.querySelector('.btn-submit');
 
 const API_KEY = 'at_572lUbE6ZuqUjJZtcUYIRLG39QM6J';
 const API_URL = `https://geo.ipify.org/api/v2/country,city?apiKey=${API_KEY}&ipAddress=`;
@@ -37,7 +38,7 @@ async function fetchLocation(ip) {
   try {
     const response = await axios.get(`${API_URL}${ip}`);
     const data = response.data;
-    // console.log(data);
+    console.log(data);
 
     ipDisplay.textContent = data.ip;
     locationDisplay.textContent =
@@ -61,6 +62,9 @@ async function fetchLocation(ip) {
       marker.setLatLng([latValue, lngValue]);
     }
   } catch (err) {
+    alert('Tracking was unsuccessful, please check your input!');
+    queryInput.value = '';
+    queryInput.focus();
     console.log(err);
   }
 }
@@ -97,3 +101,21 @@ async function initialFetch() {
 
   fetchLocation(initialIp);
 }
+
+// button animation
+
+let tween;
+
+submitBtn.addEventListener('mouseenter', () => {
+  tween = gsap.to(submitBtn, {
+    opacity: 0.5,
+    repeat: -1,
+    yoyo: true,
+  });
+  tween.restart();
+});
+
+submitBtn.addEventListener('mouseleave', () => {
+  tween.pause();
+  gsap.to(tween, { progress: 0 });
+});
